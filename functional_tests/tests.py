@@ -16,6 +16,29 @@ class NewVisitorTest(LiveServerTestCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
     
+    def test_layout_and_styling(self):
+            #edith goes to the homepage
+            self.browser.get(self.live_server_url)
+            self.browser.set_window_size(1024,768)
+            
+            #she notices the input box is nicely centered
+            inputbox = self.browser.find_element_by_id('id_new_item')
+            self.assertAlmostEqual(
+                inputbox.location['x'] + inputbox.size['width'] /2,
+                512,
+                delta =7
+            )
+            
+            #she starts a new list and sees the input is nicely centered too
+            inputbox.send_keys('testing\n')
+            inputbox = self.browser.find_element_by_id('id_new_item')
+            self.assertAlmostEqual(
+                inputbox.location['x'] + inputbox.size['width'] /2,
+                512,
+                delta =7
+            )
+            
+    
     def test_can_start_a_list_and_retrieve_it_later(self):
         #Check out homepage
         self.browser.get(self.live_server_url)
@@ -80,11 +103,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('Buy milk', page_text)
         
         #satisfied, they both go to sleep
-        self.fail('Finish the test!')
         
         #visits url, still shows same stuff
 
         #done
-
-if __name__ == '__main__':
-    unittest.main(warnings='ignore')
+        
