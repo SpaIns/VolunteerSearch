@@ -1,3 +1,4 @@
+#Created 2-6-15 Steffan
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -33,95 +34,12 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn(row_text, [row.text for row in rows])
     
     def test_layout_and_styling(self):
-            #edith goes to the homepage
-            self.browser.get(self.server_url)
-            self.browser.set_window_size(1024,768)
-            
-            #she notices the input box is nicely centered
-            inputbox = self.browser.find_element_by_id('id_new_item')
-            self.assertAlmostEqual(
-                inputbox.location['x'] + inputbox.size['width'] /2,
-                512,
-                delta =7
-            )
-            
-            #she starts a new list and sees the input is nicely centered too
-            inputbox.send_keys('testing\n')
-            inputbox = self.browser.find_element_by_id('id_new_item')
-            self.assertAlmostEqual(
-                inputbox.location['x'] + inputbox.size['width'] /2,
-                512,
-                delta =7
-            )
+            #user story for ensuring CSS changes goes here
             
     
-    def test_can_start_a_list_and_retrieve_it_later(self):
-        #Check out homepage
-        self.browser.get(self.server_url)
-
-        #Notice to-do in title
-        self.assertIn('To-Do', self.browser.title)
-        header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('To-Do', header_text)
-
-        #Invited to do to-do right away
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertEqual(
-            inputbox.get_attribute('placeholder'),
-            'Enter a to-do item'
-        )
+    def test_can_create_a_user_profile(self):
+        #user story for ceating user profile from home page goes here
         
-        #types "Buy peacock feathers" into text box
-        inputbox.send_keys('Buy peacock feathers')
-        
-        #when hits enter, page updates with 1) buy feathers
-        inputbox.send_keys(Keys.ENTER)
-        #also will be sent to a new url, where the first item is listed
-        edith_list_url = self.browser.current_url
-        self.assertRegex(edith_list_url, '/lists/.+')
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
-        
-        #still text box inviting new items
-        #enters "to make a fly"
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        inputbox.send_keys('Use peacock feathers to make a fly')
-        inputbox.send_keys(Keys.ENTER)
-        
-        #page updates again, now shows both items
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
-        self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
-        
-        #new user, francis, comes to the site
-        
-        ##we use a new browser session to make sure none of Edith's info goes thru##
-        self.browser.refresh()
-        self.browser.quit()
-        self.browser = webdriver.Firefox()
-        
-        #Francis visits webpage. No sign of Edith's list
-        self.browser.get(self.server_url)
-        page_text = self.browser.find_element_by_tag_name('body').text
-        self.assertNotIn('Buy peacock feathers', page_text)
-        self.assertNotIn('make a fly', page_text)
-        
-        #francis starts a list by entering new items
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        inputbox.send_keys('Buy milk')
-        inputbox.send_keys(Keys.ENTER)
-        
-        #Francis gets his own url
-        francis_list_url = self.browser.current_url
-        self.assertRegex(francis_list_url, 'lists/.+')
-        self.assertNotEqual(francis_list_url, edith_list_url)
-        
-        #again, no trace of edith's list
-        page_text = self.browser.find_element_by_tag_name('body').text
-        self.assertNotIn('Buy peacock feathers', page_text)
-        self.assertIn('Buy milk', page_text)
-        
-        #satisfied, they both go to sleep
-        
-        #visits url, still shows same stuff
-
-        #done
+    def test_can_create_an_organization_profile(self):
+        #user story for ceating org profile from home page goes here
         
