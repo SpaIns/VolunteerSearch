@@ -11,7 +11,19 @@ class Person(models.Model):
 	location_state = models.CharField(max_length=20)
 	date_created = models.DateField(auto_now=False, auto_now_add=True)
 	#how to make an age range? choice probably?
-	age = models.
+	MINOR = 'MNR'
+	UNDER_25 = 'U25'
+	UNDER_40 = 'U40'
+	MIDDLE_AGE = 'MDA'
+	SENIOR = 'SNR'
+	age_range_choices = (
+		(MINOR, "18 and under"),
+		(UNDER_25, "Test1"),
+		(UNDER_40, "25-39"),
+		(MIDDLE_AGE, '40-64'),
+		(SENIOR, '65+'),
+	)
+	age=models.CharField(max_length=3, choices=age_range_choices, default=UNDER_25)
 	#will have to fix the below to cap at a certain length eventually for security reasons
 	bio = models.TextField()
 	#another choice for transit
