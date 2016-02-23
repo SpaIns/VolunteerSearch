@@ -56,11 +56,11 @@ class Jobs(models.Model):
 
 
 #this one will have to auto-create skills when people add their own
-class SkillSets(models.Model):
+#class SkillSets(models.Model):
 
 
 #same as above
-class Categories(models.Model):
+#class Categories(models.Model):
 
 
 #To do later for ratings

@@ -1,6 +1,6 @@
 #Created 2-6-15 Steffan
 from django.conf.urls import url
-from lists import views
+#from lists import views
 
 urlpatterns = [
 #Below is from old stuff for some context of what to place here
