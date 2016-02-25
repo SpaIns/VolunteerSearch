@@ -34,11 +34,15 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn(row_text, [row.text for row in rows])
     
     def test_layout_and_styling(self):
-            #user story for ensuring CSS changes goes here
+        #user goes to the site
+		#user sees the home page
+		#user ntoices the banner is nciely centered
             
     
     def test_can_create_a_user_profile(self):
         #user story for ceating user profile from home page goes here
+		#user goes to the home page
+		#user 
         
     def test_can_create_an_organization_profile(self):
         #user story for ceating org profile from home page goes here
