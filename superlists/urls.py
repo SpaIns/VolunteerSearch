@@ -21,7 +21,11 @@ from lists import urls as list_urls
 
 urlpatterns = [
 #examples below
-    #url(r'^$', list_views.home_page, name='home'),
+    url(r'^$', list_views.home_page, name='home'),
     #url(r'^lists/', include(list_urls)),
     url(r'^admin/', include(admin.site.urls)),
+	url(r'^usersignup/', list_views.user_sign_up, name='userSignUp'),
+	url(r'^organizationsignup/', list_views.organization_sign_up, name='orgSignUp'),
+	url(r'^footer/', list_views.footer, name='footer'),
+	url(r'^header/', list_views.header, name='header'),
 ]

@@ -5,5 +5,17 @@ from django.http import HttpResponse
 
 # Create your views here.
 #Example view below
-#def home_page(request):
-#    return render(request, 'home.html')
+def home_page(request):
+    return render(request, 'home.html')
+
+def organization_sign_up(request):
+	return render(request, 'organization.html')
+
+def user_sign_up(request):
+	return render(request, 'user.html')
+	
+def footer(request):
+	return render(request, 'footer.html')
+	
+def header(request):
+	return render(request, 'header.html')

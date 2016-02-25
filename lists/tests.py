@@ -11,6 +11,8 @@ from lists.models import Item, List
 class HomePageTest(TestCase):
     
     #home page unit tests go here
+	def test_url_resolves_to_home_page(self):
+		pass
         
 class ModelTest(TestCase):
     

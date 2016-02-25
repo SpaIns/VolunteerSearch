@@ -29,6 +29,7 @@ class Person(models.Model):
 	#another choice for transit
 	has_transportation = models.BooleanField()
 	email = models.EmailField(max_length=254)
+	skills = models.ForeignKey('Skills')
 
 
 class Organization(models.Model):
@@ -41,7 +42,7 @@ class Organization(models.Model):
 	age = models.IntegerField()
 	#will have to fix the below to cap at a certain length eventually for security reasons
 	bio = models.TextField()
-	#needs job category link
+	jobs = models.ForeignKey('Jobs')
 	
 
 
@@ -53,15 +54,14 @@ class Jobs(models.Model):
 	#contact = link to person
 	date_created = models.DateField(auto_now=False, auto_now_add=True)
 	start_date = models.DateField(auto_now=False, auto_now_add=False)
+	skills_needed = models.ForeignKey('Skills')
 
 
-#this one will have to auto-create skills when people add their own
-#class SkillSets(models.Model):
-
-
-#same as above
-#class Categories(models.Model):
-
+#this one will have to auto-create skills when people add their own eventually
+class Skills(models.Model):
+	health = models.BooleanField()
+	pets = models.BooleanField()
+	computers = models.BooleanField()
 
 #To do later for ratings
 #class Ratings(models.Model):
