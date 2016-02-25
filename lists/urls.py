@@ -2,6 +2,8 @@
 from django.conf.urls import url
 #from lists import views
 
+#i think this url file is for dyanmically creaing unique urls for people/orgs?
+
 urlpatterns = [
 #Below is from old stuff for some context of what to place here
     #url(r'^new$', views.new_list, name='new_list'),

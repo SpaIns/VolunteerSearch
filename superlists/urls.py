@@ -1,4 +1,5 @@
 #Created 2-6-15 Steffan
+#added footer,header,org,user, home links 2-24-16 Steffan
 """superlists URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
