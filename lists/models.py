@@ -61,8 +61,8 @@ class Jobs(models.Model):
 #also will make these choices udner bigger categories later, but test w/ ages first
 class Skills(models.Model):
 	ms_office = models.BooleanField(default=False)
-	coding = = models.BooleanField(default=False)
-	senior_help = = models.BooleanField(default=False)
+	coding = models.BooleanField(default=False)
+	senior_help = models.BooleanField(default=False)
 	grooming = models.BooleanField(default=False)
 	walking = models.BooleanField(default=False)
 	training = models.BooleanField(default=False)
