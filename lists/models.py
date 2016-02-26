@@ -57,10 +57,20 @@ class Jobs(models.Model):
 	skills_needed = models.ForeignKey('Skills')
 
 #this one will have to auto-create skills when people add their own eventually
+	#add oher as text field
+#also will make these choices udner bigger categories later, but test w/ ages first
 class Skills(models.Model):
-	health = models.BooleanField()
-	pets = models.BooleanField()
-	computers = models.BooleanField()
+	ms_office = models.BooleanField(default=False)
+	coding = = models.BooleanField(default=False)
+	senior_help = = models.BooleanField(default=False)
+	grooming = models.BooleanField(default=False)
+	walking = models.BooleanField(default=False)
+	training = models.BooleanField(default=False)
+	tutoring = models.BooleanField(default=False)
+	construction = models.BooleanField(default=False)
+	restoration = models.BooleanField(default=False)
+	landscaping = models.BooleanField(default=False)
+	heavy_lifting = models.BooleanField(default=False)
 
 #To do later for ratings
 #class Ratings(models.Model):

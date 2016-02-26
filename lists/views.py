@@ -1,7 +1,7 @@
 #Created 2-6-15 Steffan
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-#from lists.models import Item, List
+from lists.models import Person, Organization, Jobs, Skills
 
 # Create your views here.
 #Example view below
