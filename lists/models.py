@@ -28,12 +28,12 @@ class Person(models.Model):
 	bio = models.TextField()
 	#another choice for transit
 	has_transportation = models.BooleanField()
-	email = models.EmailField(max_length=254)
+	email = models.EmailField(max_length=254, primary_key=True)
 	skills = models.ForeignKey('Skills')
 
 
 class Organization(models.Model):
-	org_name = models.CharField(max_length=50)
+	org_name = models.CharField(max_length=50, primary_key=True)
 	#Link org contact to a person object?
 	location_city = models.CharField(max_length=50)
 	location_state = models.CharField(max_length=20)
