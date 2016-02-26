@@ -56,7 +56,6 @@ class Jobs(models.Model):
 	start_date = models.DateField(auto_now=False, auto_now_add=False)
 	skills_needed = models.ForeignKey('Skills')
 
-
 #this one will have to auto-create skills when people add their own eventually
 class Skills(models.Model):
 	health = models.BooleanField()
