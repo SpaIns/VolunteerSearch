@@ -1,0 +1,8 @@
+{% include "header.html" %}
+<html>
+	<h2>Update Org Profile</h2>
+	<form action="/org/update/" method="post">{% csrf_token %}
+		{{form.as_p}}
+	<input type="submit" value="Update" />
+	</form>
+</html>

@@ -1,76 +1,196 @@
 #Created 2-6-15 Steffan
 #Edited 2-14-16 to create first new models
 from django.db import models
+from django.contrib.auth.models import User, BaseUserManager, AbstractBaseUser
+from django.db.models.signals import post_save
 
 #thoughts; for location, add zip/require zip?
+
+states = (
+    ('AL','ALABAMA'),
+    ('AK','ALASKA'), 
+    ('AZ','ARIZONA'),
+    ('AR','ARKANSAS'),
+    ('CA','CALIFORNIA'),
+    ('CO','COLORADO'),
+    ('CT','CONNECTICUT'),
+    ('DE','DELAWARE'),
+    ('FL','FLORIDA'),
+    ('GA','GEORGIA'),
+    ('HI','HAWAII'),
+    ('ID','IDAHO'),
+    ('IL','ILLINOIS'),
+    ('IN','INDIANA'),
+    ('IA','IOWA'),
+    ('KS','KANSAS'),
+    ('KY','KENTUCKY'),
+    ('LA','LOUISIANA'),
+    ('ME','MAINE'),
+    ('MD','MARYLAND'),
+    ('MA','MASSACHUSETTS'),
+    ('MI','MICHIGAN'),
+    ('MN','MINNESOTA'),
+    ('MS','MISSISSIPPI'),
+    ('MO','MISSOURI'),
+    ('MT','MONTANA'),
+    ('NE','NEBRASKA'),
+    ('NV','NEVADA'),
+    ('NH','NEW HAMPSHIRE'),
+    ('NJ','NEW JERSEY'),
+    ('NM','NEW MEXICO'),
+    ('NY','NEW YORK'),
+    ('NC','NORTH CAROLINA'),
+    ('ND','NORTH DAKOTA'),
+    ('OH','OHIO'),
+    ('OK','OKLAHOMA'),
+    ('OR','OREGON'),
+    ('PA','PENNSYLVANIA'),
+    ('RI','RHODE ISLAND'),
+    ('SC','SOUTH CAROLINA'),
+    ('SD','SOUTH DAKOTA'),
+    ('TN','TENNESSEE'),
+    ('TX','TEXAS'),
+    ('UT','UTAH'),
+    ('VT','VERMONT'),
+    ('VA','VIRGINIA'),
+    ('WA','WASHINGTON'),
+    ('WV','WEST VIRGINIA'),
+    ('WI','WISCONSIN'),
+    ('WY','WYOMING')
+)
     
-class Person(models.Model):
-	first_name = models.CharField(max_length=30)
-	last_name = models.CharField(max_length=30)
-	location_city = models.CharField(max_length=50)
-	location_state = models.CharField(max_length=20)
-	date_created = models.DateField(auto_now=False, auto_now_add=True)
-	#how to make an age range? choice probably?
-	MINOR = 'MNR'
-	UNDER_25 = 'U25'
-	UNDER_40 = 'U40'
-	MIDDLE_AGE = 'MDA'
-	SENIOR = 'SNR'
-	age_range_choices = (
-		(MINOR, "18 and under"),
-		(UNDER_25, "Test1"),
-		(UNDER_40, "25-39"),
-		(MIDDLE_AGE, '40-64'),
-		(SENIOR, '65+'),
-	)
-	age=models.CharField(max_length=3, choices=age_range_choices, default=UNDER_25)
-	#will have to fix the below to cap at a certain length eventually for security reasons
-	bio = models.TextField()
-	#another choice for transit
-	has_transportation = models.BooleanField()
-	email = models.EmailField(max_length=254, primary_key=True)
-	skills = models.ForeignKey('Skills')
+class Skill(models.Model):
+    skill = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.skill
 
-class Organization(models.Model):
-	org_name = models.CharField(max_length=50, primary_key=True)
-	#Link org contact to a person object?
-	location_city = models.CharField(max_length=50)
-	location_state = models.CharField(max_length=20)
-	date_created = models.DateField(auto_now=False, auto_now_add=True)
-	#ensure it's less than or equal to 4 digits?
-	age = models.IntegerField()
-	#will have to fix the below to cap at a certain length eventually for security reasons
-	bio = models.TextField()
-	jobs = models.ForeignKey('Jobs')
-	
+    class Meta:
+        ordering = ('skill',)
 
+class UserManager(BaseUserManager):
+    def create_user(self, user_name, password=None):
+        """
+        Creates and saves a User with the given email, date of
+        birth and password.
+        """
+        if not user_name:
+            raise ValueError('Users must have a user name')
 
-class Jobs(models.Model):
-	#job category link
-	info = models.TextField()
-	duration = models.DurationField()
-	location_city = models.CharField(max_length=50)
-	#contact = link to person
-	date_created = models.DateField(auto_now=False, auto_now_add=True)
-	start_date = models.DateField(auto_now=False, auto_now_add=False)
-	skills_needed = models.ForeignKey('Skills')
+        user = self.model(
+            user_name=user_name,
+        )
 
-#this one will have to auto-create skills when people add their own eventually
-	#add oher as text field
-#also will make these choices udner bigger categories later, but test w/ ages first
-class Skills(models.Model):
-	ms_office = models.BooleanField(default=False)
-	coding = models.BooleanField(default=False)
-	senior_help = models.BooleanField(default=False)
-	grooming = models.BooleanField(default=False)
-	walking = models.BooleanField(default=False)
-	training = models.BooleanField(default=False)
-	tutoring = models.BooleanField(default=False)
-	construction = models.BooleanField(default=False)
-	restoration = models.BooleanField(default=False)
-	landscaping = models.BooleanField(default=False)
-	heavy_lifting = models.BooleanField(default=False)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-#To do later for ratings
-#class Ratings(models.Model):
+    def create_superuser(self, user_name, password):
+        """
+        Creates and saves a superuser with the given email, date of
+        birth and password.
+        """
+        user = self.create_user(user_name,
+            password=password,
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user    
+
+class User(AbstractBaseUser):
+    skills_choices = (
+        ('ms_office', 'MS Office'),
+        ('coding', 'Programming'),
+        ('senior_help', 'Senior Help'),
+        ('grooming', 'Pet Grooming'),
+        ('walking', 'Dog Walking'),
+        ('training', 'Pet Training'),
+        ('tutoring', 'Tutoring'),
+        ('construction', 'Construction'),
+        ('restoration', 'Restoration'),
+        ('landscaping', 'Landscaping'),
+        ('heavy_lifting', 'Heavy Lifting')
+    )
+    
+    user_type_choices = (
+        ('USER', 'USER'),
+        ('ORG', 'ORG'),
+    )
+
+    age_range_choices = (
+        ('NA', '-'),
+        ('MINOR', '18 and under'),
+        ('U25', '19-25'),
+        ('U40', '25-39'),
+        ('MDA', '40-64'),
+        ('SNR', '65+'),
+    )
+    
+    email = models.EmailField(
+        max_length=255,
+        unique=True,
+    )
+    date_of_birth = models.DateField(default='1990-04-04')
+    user_name = models.CharField(max_length=20,verbose_name='Name', unique=True)
+    location_city = models.CharField(max_length=50, verbose_name='City')
+    location_state = models.CharField(max_length=20, verbose_name='State', choices=states, default='WA')
+    date_created = models.DateField(auto_now=False, auto_now_add=True)
+    age=models.CharField(max_length=5, choices=age_range_choices, default='NA')
+    #will have to fix the below to cap at a certain length eventually for security reasons
+    bio = models.TextField()
+    skills = models.ManyToManyField(Skill)
+    
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    user_type=models.CharField(max_length=4, choices=user_type_choices, default='USER')
+    
+    objects = UserManager()
+
+    USERNAME_FIELD = 'user_name'
+    REQUIRED_FIELDS = []
+
+    def get_full_name(self):
+        # The user is identified by their user name
+        return self.user_name
+
+    def get_short_name(self):
+        # The user is identified by their user name
+        return self.user_name
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.user_name
+
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        # Simplest possible answer: All admins are staff
+        return self.is_admin
+
+class Position(models.Model):
+    job_name = models.CharField(max_length=20,unique=True)
+    info = models.TextField()
+    start_date = models.DateField(auto_now=False, auto_now_add=False)
+    end_date = models.DateField(auto_now=False, auto_now_add=False)
+    location_city = models.CharField(max_length=50)
+    location_state = models.CharField(max_length=20, choices=states, default='WA')
+    parent = models.ForeignKey(User, blank=True, null=True, related_name='parent')
+    child = models.ForeignKey(User, blank=True, null=True, verbose_name='Volunteer', related_name='child')
+
+    date_created = models.DateField(auto_now=False, auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'job_name'
+    REQUIRED_FIELDS = []

@@ -1,31 +1,35 @@
-
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="/static/css/header.css" />
+<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
 	<body>
 		<font face="helvetica">
-
 		<div id="colorstrip"/></div>
 		<div id="wrap">
-		   <h1><center>VOLUNTEER SEARCH</center></h1>
+		<h1><center>VOLUNTEER SEARCH</center></h1>
 		<div id="colorstrip"/></div>
 		<ul>
-		  <li><a class="active" href="/">Home</a></li>
-		  <li><a href="ABOUT US LINK">About Us</a></li>
-		  <li><a href="CONTACT LINK">Contact</a></li>
-		<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse Opportunities
-			<span class="caret"></span></a>
-			<ul class="dropdown-menu">
-			  <li><a href="#">Animals</a></li>
-			  <li><a href="#">Environment</a></li>
-			  <li><a href="#">Education</a></li> 
+			<li><a class="active" href="/">Home</a></li>
+			<li><a href="ABOUT US LINK">About Us</a></li>
+			<li><a href="CONTACT LINK">Contact</a></li>
+			<li><a href="/jobs/view/">View Positions</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse Opportunities
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Animals</a></li>
+					<li><a href="#">Environment</a></li>
+					<li><a href="#">Education</a></li> 
+				</ul>
+			</li>
+			<ul style="float:right;list-style-type:none;">
+				{% if user.is_anonymous %}
+					<li><a href="/login">User Log In</a></li>
+				{% else %}
+					<li><a href="/accounts/profile">{{ user }}</a></li>
+					<li><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+				{% endif %}
 			</ul>
-		  </li>
-		  <ul style="float:right;list-style-type:none;">
-			<li><a href="LOG IN LINK">Log In</a></li>
-			<li><a href="usersignup">Register</a></li>
-		  </ul>
 		</ul>
 		</font>
 	</body>
