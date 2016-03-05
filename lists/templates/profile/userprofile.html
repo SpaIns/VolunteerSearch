@@ -1,0 +1,116 @@
+{% include "header.html" %}
+	<h2>{{ user.user_name }}'s Profile</h2>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <style>
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 30px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 2px solid;
+        }
+    </style>
+    
+	{% if user.user_type == 'USER' %}
+        {% if not jobs %}
+            <center>No positions to display.</center><br><br>
+        {% else %} 
+			<div class="row">
+				{% for job in myjobs %}
+					<div class="col-md-4">
+						<strong><center>{{ job.job_name }}</center></strong><br>
+						<b>Start Date:</b> {{ job.start_date }}<br>
+						<b>End Date:</b> {{ job.end_date }}<br>
+						<b>Location:</b> {{ job.location_city }}, {{ job.location_state }}<br>
+						<b>Additional Info:</b><br>
+						{{ job.info }}<br>
+						<b>Required skills: </b>
+						{% for skill in job.skills.all %}
+							{{ skill.skill }}{% if not forloop.last %},{% endif %}
+						{% empty %}
+							None
+						{% endfor %}<br>
+						<b>Contact Email:</b> {{ job.email }}<br><br>						
+						<center>Created by: {{ job.parent.user_name }}</center><br>
+					</div>
+				{% endfor %} 
+			</div><br>
+        {% endif %} 			
+	{% else %} 
+        {% if not jobs %}
+            <center>No positions to display.</center><br><br>
+        {% else %} 
+            <div class="row">
+                {% for job in jobs %}
+                    <div class="col-md-4">
+						<strong><center>{{ job.job_name }}</center></strong><br>
+						<b>Start Date:</b> {{ job.start_date }}<br>
+						<b>End Date:</b> {{ job.end_date }}<br>
+						<b>Location:</b> {{ job.location_city }}, {{ job.location_state }}<br>
+						<b>Additional Info:</b><br>
+						{{ job.info }}<br>
+						<b>Required skills: </b>
+						{% for skill in job.skills.all %}
+							{{ skill.skill }}{% if not forloop.last %},{% endif %}
+						{% empty %}
+							None
+						{% endfor %}<br>	
+						<b>Contact Email:</b> {{ job.email }}<br><br>						
+                        {% if job.child == Null %}
+                            <center>Open Position</center>
+                        {% else %}
+                            <center>Volunteer: {{ job.child.user_name }}</center>
+                        {% endif %} 
+                    </div>                
+                {% endfor %} 
+            </div><br>
+            <center>
+                <form action="/accounts/profile/" method="post">{% csrf_token %}
+                    {{form.as_p}}        
+                    <input type="submit" value="Update Position Status" />
+                </form><br>
+            </center>
+        {% endif %} 
+        <center>
+            <form action="/org/create">
+                <input type="submit" value="Create Position">
+            </form> 
+        </center><br><br> 
+	{% endif %}   
+
+    {% if user.user_type == 'USER' %}
+        <b>Name: </b>{{ user.user_name }}<br>
+ 	{% else %} 
+        <b>Company Name: </b>{{ user.user_name }}<br>
+	{% endif %}    
+    <b>Email: </b>{{ user.email }}<br>
+    {% if user.user_type == 'USER' %}
+        <b>Date of Birth: </b>{{ user.date_of_birth }}<br>
+        <b>Age Range: </b>{{ user.age }}<br>
+    {% endif %}
+    <b>Location: </b>{{ user.location_city }}, {{ user.location_state }}<br>
+    <b>Bio:</b><br>{{ user.bio }}<br>
+    <b>Skills: </b>
+    {% if user.user_type == 'USER' %}
+        {% for skill in user.skills.all %}
+            {{ skill.skill }}{% if not forloop.last %},{% endif %}
+        {% empty %}
+            None
+        {% endfor %}
+    {% endif %}<br><br>
+                        
+	{% if user.user_type == 'USER' %}
+		<form action="/accounts/update">
+			<input type="submit" value="Update Profile">
+		</form>
+	{% else %}
+		<form action="/org/update">
+			<input type="submit" value="Update Profile">
+		</form>
+	{% endif %}    
