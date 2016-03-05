@@ -1,0 +1,13 @@
+{% include "header.html" %}
+
+{% block content %}
+
+  <h2>Organization Registration</h2>
+
+  <form action="/org/register/" method="post">{% csrf_token %}
+    {{form.as_p}}
+  <input type="submit" value="Register" />
+
+  </form>
+
+{% endblock %}

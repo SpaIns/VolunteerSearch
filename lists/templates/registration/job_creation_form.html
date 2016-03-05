@@ -1,0 +1,13 @@
+{% include "header.html" %}
+
+{% block content %}
+
+  <h2>Job Creation</h2>
+
+  <form action="/org/create/" method="post">{% csrf_token %}
+    {{form.as_p}}
+  <input type="submit" value="Create" />
+
+  </form>
+
+{% endblock %}
