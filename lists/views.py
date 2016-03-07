@@ -23,6 +23,9 @@ def footer(request):
 def header(request):
 	return render(request, 'header.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

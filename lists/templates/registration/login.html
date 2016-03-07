@@ -8,6 +8,12 @@
 
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
 {% csrf_token %}
+<link rel="stylesheet" href="/static/css/normalize.css">
+    
+    <!--<link rel='stylesheet prefetch' href='http://necolas.github.io/normalize.css/3.0.1/normalize.css'>
+     -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
 <table>
 <tr>
     <td>{{ form.username.label_tag }}</td>
@@ -19,7 +25,7 @@
 </tr>
 </table>
 
-<input type="submit" value="login" />
+<button type="submit" value="Register">Log In</button>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 

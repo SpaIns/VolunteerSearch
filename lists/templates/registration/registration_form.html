@@ -3,9 +3,17 @@
     <style>
 
     </style>
-	<h2>Registration</h2>
+	
 	<form action="/accounts/register/" method="post">{% csrf_token %}
+        <center><h2>Registration</h2></center>
+        <link rel="stylesheet" href="/static/css/normalize.css">
+            
+            <!--<link rel='stylesheet prefetch' href='http://necolas.github.io/normalize.css/3.0.1/normalize.css'>
+             -->
+            <link rel="stylesheet" href="/static/css/style.css">
+
 		{{form.as_p}}
-	<input type="submit" value="Register" />
-	</form>
+	<button type="submit" value="Register">Sign Up!</button>
+    </form>
 </html>
+{% include "footer.html" %}
