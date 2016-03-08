@@ -1,8 +1,18 @@
 {% include "header.html" %}
 <html>
-	<h2>Update Org Profile</h2>
+
 	<form action="/org/update/" method="post">{% csrf_token %}
-		{{form.as_p}}
-	<input type="submit" value="Update" />
+		<center><h2>Update Org Profile</h2></center>
+        {{form.as_p}}
+        
+        <link rel="stylesheet" href="/static/css/normalize.css">
+            
+            <!--<link rel='stylesheet prefetch' href='http://necolas.github.io/normalize.css/3.0.1/normalize.css'>
+             -->
+            <link rel="stylesheet" href="/static/css/style.css">
+
+        <button type="submit" value="Register">Update</button>
+
 	</form>
 </html>
+{% include "footer.html" %}

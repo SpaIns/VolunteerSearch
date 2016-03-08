@@ -41,4 +41,5 @@ urlpatterns = [
     url(r'^accounts/update/$', list_views.update_profile, name='update_profile'),
     url(r'^org/update', list_views.update_org_profile, name='update_org_profile'),
     url(r'^profile/search', list_views.profile_search, name='profile_search'),
+    url(r'^about/', list_views.about, name='about'),
 ]

@@ -9,7 +9,7 @@ html {
 
 body {
   height: 100%;
-  font-family: Roboto, san-serif;
+  font-family: Helvetica;
   font-weight: 300;
   background-color: #f5f6f7;
 }
@@ -20,7 +20,7 @@ form {
   position: relative;
   top: 0%;
   left: 50%;
-  width: 300px;
+  width: 500px;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   margin: 2rem 0;
@@ -65,8 +65,9 @@ select:focus {
   border-color: #ef7ead;
 }
 
+/* Bio box */
 textarea {
-  max-width: 300px;
+  max-width: 500px;
   height: 100px;
 }
 
@@ -74,9 +75,9 @@ input[type='text'],
 select {
   height: 34px;
 }
-
+/* Changes dropdown font size */
 select {
-  font-size: .875rem;
+  font-size: 1.5rem;
 }
 
 input[type='checkbox'],
@@ -133,7 +134,7 @@ button {
   color: white;
   border: none;
   border-radius: .25rem;
-  background-color: #ef7ead;
+  background-color: #F87531;
   outline: none;
   box-shadow: 0 0.4rem 0.1rem -0.3rem rgba(0, 0, 0, 0.1);
   /* We'll talk about this next */

@@ -34,16 +34,43 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn(row_text, [row.text for row in rows])
     
     def test_layout_and_styling(self):
-        #user goes to the site
-		#user sees the home page
-		#user ntoices the banner is nciely centered
-            
+        #Lea is a 10 year old who wants to volunteer at a dance organization. 
+        #Rea is a volunteer recruiter at the local YNCA.
+        #Lea is new in town and doesn't know which organization is looking for volunteers
+        #Rea is looking for five volunteers at the day care center. 
+        #Lea and Rea hear about VolunteerSearch from two different sources
+        #Lea and Rea go to the site
+        #Lea and Rea see the home page and ntoicet the banner is nicely centered
+        #Lea selects View Positions to learn what her options are    
     
     def test_can_create_a_user_profile(self):
-        #user story for ceating user profile from home page goes here
-		#user goes to the home page
-		#user 
+        #Lea finds a position available in her local YNCA and she wants to register
+        #Lea goes to the home page
+        #Lea sees there is a Volunteer and an Organization button
+        #Lea clicks on the Volunteer Button  
+        #Lea is taken to another page with a registration form to fill out 
+        #Lea fills out her full name
+        #Lea fills out her email 
+        #Lea fills out her DOB
+        #Lea fills out her city 
+        #Lea fills out her state 
+        #Lea fills out her age 
+        #Lea fills out her Bio: her interests, her goals and her experience
+        #Lea creates a password
+        #Lea re-enters her password
+        #Lea enters her skills
+        #Lea clicks Register
         
     def test_can_create_an_organization_profile(self):
-        #user story for ceating org profile from home page goes here
-        
+        #Rea wants to register and post an ad for the new position asap 
+        #Rea sees there is a Volunteer and an Organization button
+        #Rea clicks on the Organization Button  
+        #Rea is taken to another page with a registration form to fill out 
+        #Rea fills out her full name
+        #Rea fills out the organization's email 
+        #Rea fills out the organization's city 
+        #Rea fills out the organization's state  
+        #Rea fills out a Bio: the organization's environment, the mission statement, types of jobs avail
+        #Rea creates a password
+        #Rea re-enters her password
+        #Rea clicks Register

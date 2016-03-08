@@ -22,6 +22,9 @@ def footer(request):
 	
 def header(request):
 	return render(request, 'header.html')
+    
+def about(request):
+    return render(request, 'about.html')
 
 def register(request):
     if request.method == 'POST':
@@ -91,9 +94,32 @@ def org_profile(request):
 	return render(request, 'profile/orgprofile.html')
 	
 def job_view(request):
-    jobs = Position.objects.all()
     if (request.GET.get('officebutton')):
-        jobs = Position.objects.filter(skills__skill = 'ms_office')	
+        jobs = Position.objects.filter(skills__skill = 'ms_office')
+    if (request.GET.get('codebutton')):
+        jobs = Position.objects.filter(skills__skill = 'coding')
+    if (request.GET.get('srhelpbutton')):
+        jobs = Position.objects.filter(skills__skill = 'senior_help')	
+    if (request.GET.get('groomingbutton')):
+        jobs = Position.objects.filter(skills__skill = 'grooming')	
+    if (request.GET.get('walkingbutton')):
+        jobs = Position.objects.filter(skills__skill = 'walking')	
+    if (request.GET.get('trainingbutton')):
+        jobs = Position.objects.filter(skills__skill = 'training')	
+    if (request.GET.get('tutoringbutton')):
+        jobs = Position.objects.filter(skills__skill = 'tutoring')	
+    if (request.GET.get('constructionbutton')):
+        jobs = Position.objects.filter(skills__skill = 'construction')	
+    if (request.GET.get('restorationbutton')):
+        jobs = Position.objects.filter(skills__skill = 'restoration')	
+    if (request.GET.get('landscapingbutton')):
+        jobs = Position.objects.filter(skills__skill = 'landscaping')	
+    if (request.GET.get('liftingbutton')):
+        jobs = Position.objects.filter(skills__skill = 'heavy_lifting')
+    if (request.GET.get('clearbutton')):
+        jobs = Position.objects.all()
+    else:
+        jobs = Position.objects.all()	
     
     return render(request, 'profile/jobview.html', {'jobs': jobs})
 
