@@ -179,8 +179,8 @@ class User(AbstractBaseUser):
 class Position(models.Model):
     job_name = models.CharField(max_length=20,unique=True)
     info = models.TextField()
-    start_date = models.DateField(auto_now=False, auto_now_add=False)
-    end_date = models.DateField(auto_now=False, auto_now_add=False)
+    start_date = models.DateField(auto_now=False, auto_now_add=False, default='2016-01-01')
+    end_date = models.DateField(auto_now=False, auto_now_add=False, default='2016-01-01')
     location_city = models.CharField(max_length=50)
     location_state = models.CharField(max_length=20, choices=states, default='WA')
     parent = models.ForeignKey(User, blank=True, null=True, related_name='parent')

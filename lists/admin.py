@@ -102,6 +102,7 @@ class UserCreationForm(forms.ModelForm):
         # Save the provided password in hashed format
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
+        user.date_of_birth = self.cleaned_data['date_of_birth']
         
         old_save_m2m = self.save_m2m
         def save_m2m():
@@ -156,6 +157,8 @@ class JobCreationForm(forms.ModelForm):
     def save(self, commit=True):
         # Save the provided password in hashed format
         user = super(JobCreationForm, self).save(commit=False)
+        user.start_date = self.cleaned_data['start_date'] 	
+        user.end_date = self.cleaned_data['end_date'] 
 		
         old_save_m2m = self.save_m2m
         def save_m2m():
