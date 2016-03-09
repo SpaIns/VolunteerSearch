@@ -43,7 +43,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #Lea clicks on the Volunteer Button  
         volunteerButton = self.browser.find_element_by_class_name('VolunteerHomeButton')
         volunteerButton.click()
-        time.sleep(6)
+        self.browser.implicitly_wait(10)
         #Lea is taken to another page with a registration form to fill out 
         #Lea fills out her full name
         name_fill = self.browser.find_element_by_id('id_user_name')
@@ -60,10 +60,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
             #left as default WA
         #Lea fills out her age 
         age_select = Select(self.browser.find_element_by_id('id_age'))
+        age_select.select_by_visible_text('65+')
         
-        
-        time.sleep(1)
-        age_value.click()
+        self.browser.implicitly_wait(10)
         #Lea fills out her Bio: her interests, her goals and her experience
         bio_fill = self.browser.find_element_by_id('id_bio')
         bio_fill.send_keys('Im Lea and I like to volunteer, especially as a tester')
@@ -73,28 +72,53 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #Lea re-enters her password
         pass_repeat_fill = self.browser.find_element_by_id('id_password2')
         pass_repeat_fill.send_keys('badpassword')
-        #Lea enters her skills
-        skill_select = self.browser.find_element_by_id('id_skills_0')
-        skill_select.click()
-        #Lea clicks Register
-        register_button = self.browser.find_element_by_type('submit')
-        register_button.click()
-        time.sleep(15)
         
-    #def test_can_create_an_organization_profile(self):
+        #skills do not show up for whatever reason....
+        #Lea enters her skills
+        #skill_select = self.browser.find_element_by_id('id_skills_0')
+        #skill_select.click()
+        #Lea clicks Register
+        register_button = self.browser.find_element_by_xpath("//*[@type='submit']")
+        register_button.click()
+        self.browser.implicitly_wait(10)
+        
+    def test_can_create_an_organization_profile(self):
         #pass
         #Rea wants to register and post an ad for the new position asap 
         #Rea sees there is a Volunteer and an Organization button
-        #Rea clicks on the Organization Button  
+        self.browser.get(self.server_url)
+        #Rea clicks on the Organization Button
+        organizationButton = self.browser.find_element_by_class_name('OrganizationHomeButton')
+        organizationButton.click()
+        self.browser.implicitly_wait(10)
         #Rea is taken to another page with a registration form to fill out 
         #Rea fills out her full name
+        name_fill = self.browser.find_element_by_id('id_user_name')
+        name_fill.send_keys('Rea')
         #Rea fills out the organization's email 
+        email_fill = self.browser.find_element_by_id('id_email')
+        email_fill.send_keys('rea@gmailfake.com')
         #Rea fills out the organization's city 
-        #Rea fills out the organization's state  
+        city_fill = self.browser.find_element_by_id('id_location_city')
+        city_fill.send_keys('Seattle')
+        #Rea fills out the organization's state 
+            #left as default WA
         #Rea fills out a Bio: the organization's environment, the mission statement, types of jobs avail
+        bio_fill = self.browser.find_element_by_id('id_bio')
+        bio_fill.send_keys('Im Rea with ReaOrg, a company that loves to test!')
         #Rea creates a password
+        pass_fill = self.browser.find_element_by_id('id_password1')
+        pass_fill.send_keys('badpassword')
         #Rea re-enters her password
+        pass_repeat_fill = self.browser.find_element_by_id('id_password2')
+        pass_repeat_fill.send_keys('badpassword')
         #Rea clicks Register
+        register_button = self.browser.find_element_by_xpath("//*[@type='submit']")
+        register_button.click()
+        self.browser.implicitly_wait(10)
+        
+    #def test_organization_can_create_a_job(self):
+    #    pass
         
         
     def test_layout_and_styling(self):
