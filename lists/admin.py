@@ -37,9 +37,9 @@ class UserUpdateProfile(forms.ModelForm):
         old_save_m2m = self.save_m2m
         def save_m2m():
            old_save_m2m()
-           user.skill.clear()
+           user.skills.clear()
            for skill in self.cleaned_data['skill']:
-               user.skill.add(skill)
+               user.skills.add(skill)
         self.save_m2m = save_m2m        
         
         if commit:
