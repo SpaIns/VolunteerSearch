@@ -1,5 +1,6 @@
 <head>
 <style>
+
 h1 {
       font-size: 2em;
       padding: 1em 8px;
@@ -24,7 +25,11 @@ li a {
     text-decoration: none;
 }
 a:hover:not(.active) {
-    background-color: #111;
+	background-color: #A5EDEC;
+    border-top: 2px dotted white;
+    border-bottom: 2px dotted white;
+	border-left:2px dotted white;
+	border-right:2px dotted white
 }
 .active {
 background-color:#37BC61;
@@ -43,16 +48,23 @@ li ul li a {
 	min-width: 100px;
 	padding: 0 20px;
 }
-/*Display the dropdown on hover*/
-ul li a:hover + .hidden, .hidden:hover {
-	display: block;
-}
 #colorstrip{
     height: 2px;
     border-style: solid;
     border-color: #F87531;
     background-color: #F87531;
 }
+.container{
+	width:100%;
+	float:center;
+	padding:10px;
+}
+  .header {
+	  display:block;
+    height:80px;
+    background-color:white;
+    border:1px solid white;
 
+}
 </style>
 </head>

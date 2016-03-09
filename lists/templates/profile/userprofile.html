@@ -1,6 +1,32 @@
 {% include "header.html" %}
-	<h2>{{ user.user_name }}'s Profile</h2>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+	<center><h2>{{ user.user_name }}'s Profile</h2></center>
+            <center><img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt=""></center>
+            <br><br>
+    {% if user.user_type == 'USER' %}
+        <center><b>Name: </b>{{ user.user_name }}<br></center>
+    {% else %} 
+        <center><b>Company Name: </b>{{ user.user_name }}<br></center>
+    {% endif %}    
+    <center><b>Email: </b>{{ user.email }}<br></center>
+    {% if user.user_type == 'USER' %}
+        <center><b>Date of Birth: </b>{{ user.date_of_birth }}<br></center>
+        <center><b>Age Range: </b>{{ user.age }}<br></center>
+    {% endif %}
+    <center><b>Location: </b>{{ user.location_city }}, {{ user.location_state }}<br></center>
+    <center><b>Bio:</b><br>{{ user.bio }}<br></center>
+    {% if user.user_type == 'USER' %}
+        <center><b>Skills: </b></center>
+        <center>{% for skill in user.skills.all %}
+            {{ skill.skill }}{% if not forloop.last %},{% endif %}
+        {% empty %}
+            None
+        {% endfor %}</center>
+    {% endif %}
+    <link rel="stylesheet" href="/static/css/normalize.css">
+            
+    <!--<link rel='stylesheet prefetch' href='http://necolas.github.io/normalize.css/3.0.1/normalize.css'>   -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
     <style>
         .row {
             margin-right: -15px;
@@ -18,7 +44,7 @@
     </style>
     
 	{% if user.user_type == 'USER' %}
-        {% if not jobs %}
+        {% if not myjobs %}
             <center>No positions to display.</center><br><br>
         {% else %} 
 			<div class="row">
@@ -69,48 +95,26 @@
                         {% endif %} 
                     </div>                
                 {% endfor %} 
-            </div><br>
-            <center>
+            </div>
+            
                 <form action="/accounts/profile/" method="post">{% csrf_token %}
                     {{form.as_p}}        
-                    <input type="submit" value="Update Position Status" />
-                </form><br>
-            </center>
+                    <button type="submit" value="Update Position Status">Update Position Status</button>
+                </form>
         {% endif %} 
-        <center>
             <form action="/org/create">
-                <input type="submit" value="Create Position">
+                <button type="submit" value="Create Position">Create Position</button>
             </form> 
-        </center><br><br> 
+         
 	{% endif %}   
 
-    {% if user.user_type == 'USER' %}
-        <b>Name: </b>{{ user.user_name }}<br>
- 	{% else %} 
-        <b>Company Name: </b>{{ user.user_name }}<br>
-	{% endif %}    
-    <b>Email: </b>{{ user.email }}<br>
-    {% if user.user_type == 'USER' %}
-        <b>Date of Birth: </b>{{ user.date_of_birth }}<br>
-        <b>Age Range: </b>{{ user.age }}<br>
-    {% endif %}
-    <b>Location: </b>{{ user.location_city }}, {{ user.location_state }}<br>
-    <b>Bio:</b><br>{{ user.bio }}<br>
-    <b>Skills: </b>
-    {% if user.user_type == 'USER' %}
-        {% for skill in user.skills.all %}
-            {{ skill.skill }}{% if not forloop.last %},{% endif %}
-        {% empty %}
-            None
-        {% endfor %}
-    {% endif %}<br><br>
                         
 	{% if user.user_type == 'USER' %}
 		<form action="/accounts/update">
-			<input type="submit" value="Update Profile">
+			<button type="submit" value="Register">Update Profile</button>
 		</form>
 	{% else %}
 		<form action="/org/update">
-			<input type="submit" value="Update Profile">
+			<button type="submit" value="Register">Update Profile</button>
 		</form>
 	{% endif %}    

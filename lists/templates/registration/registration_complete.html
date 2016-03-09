@@ -1,7 +1,11 @@
 {% include "header.html" %}
+<link rel="stylesheet" href="/static/css/normalize.css">
+            
+    <!--<link rel='stylesheet prefetch' href='http://necolas.github.io/normalize.css/3.0.1/normalize.css'>   -->
+    <link rel="stylesheet" href="/static/css/style.css">
 {% block content %}
 
-  <h2>Thank you for Registering</h2>
-  <p><a href="/login/">Login</a></p>
+  <center><h2>Thank you for Registering</h2></center>
+  <center><button onclick="window.location.href='/login/'">Login</button></center>
 
 {% endblock %}

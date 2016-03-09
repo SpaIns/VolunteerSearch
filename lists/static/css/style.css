@@ -11,7 +11,7 @@ body {
   height: 100%;
   font-family: Helvetica;
   font-weight: 300;
-  background-color: #f5f6f7;
+  background-color: white;
 }
 
 
@@ -152,10 +152,8 @@ button {
 }
 button:hover {
   cursor: pointer;
-  background-color: #ff96c8;
+  background-color: #A5EDEC;
   box-shadow: 0 0 0 0 transparent;
-  -webkit-transform: scale(1.1) rotateX(0);
-          transform: scale(1.1) rotateX(0);
 }
 button:active {
   background-color: #ef7ead;
