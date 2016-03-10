@@ -23,9 +23,9 @@ LOGIN_REDIRECT_URL = '/accounts/profile/'
 SECRET_KEY = '(_lqq!ct*tsw-$5vtd-%v89ial8u#1*gb_2w)$(n=^j8@ey1wh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.volunteersearch.net']
 
 
 # Application definition

@@ -1,6 +1,6 @@
 {% include "header.html" %}
 <!DOCTYPE html>
-    <style>
+<style>
 .row {
             margin-right: -15px;
             margin-left: -15px;
@@ -20,7 +20,7 @@
 			margin-right: 20px;
 			margin-bottom: 20px;
         }
-.btn {
+.btn-primary {
 	color: white;
 	background-color: #F87531;
 	border-color: #F87531;
@@ -30,7 +30,22 @@
 	padding-bottom: 10px;
 	border-color: white;
 }
-.btn:hover {
+.btn-secondary {
+	color: white;
+	background-color: #37BC61;
+	border-color: #37BC61;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-color: white;
+}
+.btn-primary:hover {
+	background-color: #66CCCC;
+	border-color: white;
+}
+.btn-secondary:hover {
+	color: white;
 	background-color: #66CCCC;
 	border-color: white;
 }
@@ -39,14 +54,19 @@
     -moz-column-count: 2; /* Firefox */
     column-count: 2;
 }
-.container2 {
-	position: relative;
+.left {
+	position: fixed;
 	margin-left: 30px;
 	margin-top: 20px;
     width: 200px;
     float: left; 
 
 }   
+.right {
+	position: relative;
+	margin-left: 220px;
+	position: static
+}
 
 </style>
 <br>
@@ -59,15 +79,13 @@
             <input type="submit" class="btn" value="Search for Profile" name="profsearchbutton">
         </form><br>
 	</center>
-    
-<center>
+<div class="right">    
     {% if users %}
-        <h2>Results</h2>
-    {% endif %}</center>
+        <h2>Users</h2>
+    {% endif %}
     <div class="row">
         {% for profile in users %}
             {% if profile.user_type == 'USER' %}
-                <div class="container2">
                 <div class="col-md-4">
                     <center><b>{{ profile.user_name }}</b></center><br>
                     <b>Email: </b>{{ profile.email }}<br>
@@ -101,6 +119,7 @@
             {% endif %}
         {% endfor %}
     </div>
-    </div>
+</div>
+
     </body>
     </html>

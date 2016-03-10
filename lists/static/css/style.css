@@ -44,6 +44,8 @@ label {
 }
 
 input[type='text'],
+input[type='email'],
+input[type='password'],
 textarea,
 select {
   display: block;
@@ -60,6 +62,8 @@ select {
           transition-duration: none;
 }
 input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
 textarea:focus,
 select:focus {
   border-color: #ef7ead;
@@ -72,6 +76,8 @@ textarea {
 }
 
 input[type='text'],
+input[type='email'],
+input[type='password'],
 select {
   height: 34px;
 }
