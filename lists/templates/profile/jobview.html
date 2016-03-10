@@ -1,51 +1,136 @@
-{% include "header.html" %}
-    <style>
-        .row {
+{% include "header.html" %} 
+
+<!DOCTYPE html>
+<style>
+.row {
             margin-right: -15px;
             margin-left: -15px;
         }
         .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+			float: left;
             position: relative;
             min-height: 1px;
+			min-width: 500px;
             padding-right: 15px;
             padding-left: 30px;
             padding-top: 15px;
             padding-bottom: 15px;
-            border: 2px solid;
+            border: 1px solid;
+			background-color: #FFEECD;
+			margin-left: 20 px;
+			margin-right: 20px;
+			margin-bottom: 20px;
         }
-    </style>
-       
-	<form action='#' method="get">
-		<input type="submit" class="btn btn-primary btn-xs" value="MS Office" name="officebutton">
-		<input type="submit" class="btn btn-primary btn-xs" value="Programming" name="codebutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Senior Help" name="srhelpbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Pet Grooming" name="groomingbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Dog Walking" name="walkingbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Pet Training" name="trainingbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Tutoring" name="tutoringbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Construction" name="constructionbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Restoration" name="restorationbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Landscaping" name="landscapingbutton">
-        <input type="submit" class="btn btn-primary btn-xs" value="Heavy Lifting" name="liftingbutton">
-        <br>
-        <input type="submit" class="btn btn-primary btn-s" value="Clear Filter" name="clearbutton">
-	</form><br>
-	
-	{% for job in jobs %}
-		<div class="col-md-4">
-			<strong><center>{{ job.job_name }}</center></strong><br>
-			<b>Start Date:</b> {{ job.start_date }}<br>
-			<b>End Date:</b> {{ job.end_date }}<br>
-			<b>Location:</b> {{ job.location_city }}, {{ job.location_state }}<br>
-			<b>Additional Info:</b><br>
-			{{ job.info }}<br>
-			<b>Required skills: </b>
-			{% for skill in job.skills.all %}
-				{{ skill.skill }}{% if not forloop.last %},{% endif %}
-			{% empty %}
-				None
-			{% endfor %}<br>
-			<b>Contact Email:</b> {{ job.email }}<br><br>						
-			<center>Created by: {{ job.parent.user_name }}</center><br>
-		</div>
-	{% endfor %}
+.btn-primary {
+	color: white;
+	background-color: #F87531;
+	border-color: #F87531;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-color: white;
+}
+.btn-secondary {
+	color: white;
+	background-color: #37BC61;
+	border-color: #37BC61;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-color: white;
+}
+.btn-primary:hover {
+	background-color: #66CCCC;
+	border-color: white;
+}
+.btn-secondary:hover {
+	color: white;
+	background-color: #66CCCC;
+	border-color: white;
+}
+.column {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+.left {
+	position: fixed;
+	margin-left: 30px;
+	margin-top: 20px;
+    width: 200px;
+    float: left; 
+
+}   
+.right {
+	position: relative;
+	margin-left: 220px;
+	position: static
+}
+.containertitle {
+	color: white;
+	background-color: #66CCCC;
+	padding: 10px;
+	border: 1px solid;
+	border-color: #F87531;
+	border-color: white;
+}
+</style>
+<font style="helvetica">
+<div class ="left">
+<form action='#' method="get">
+  <div class="btn-group-vertical">
+  <div class="containertitle"><center>Filter your search here</div></center><br>
+  <input type="submit" class="btn btn-primary btn-xs" value="MS Office" name="officebutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Programming" name="codebutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Senior Help" name="srhelpbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Pet Grooming" name="groomingbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Dog Walking" name="walkingbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Pet Training" name="trainingbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Tutoring" name="tutoringbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Construction" name="constructionbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Restoration" name="restorationbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Landscaping" name="landscapingbutton">
+  <input type="submit" class="btn btn-primary btn-xs" value="Heavy Lifting" name="liftingbutton">
+  <br>
+  <input type="submit" class="btn btn-secondary" value="Clear Filter" name="clearbutton">
+</form>
+</div>
+</div>
+<br>
+<div class="right">
+<h3>Find an opportunity today!</h3>
+<br>
+</div>
+
+{% for job in jobs %}
+<div class="right">
+<div class="col-md-4"> <strong>
+  <center>
+   <h3> {{ job.job_name }} </h3>
+  </center>
+  </strong><br>
+  <b>Start Date:</b> {{ job.start_date }}<br>
+  <b>End Date:</b> {{ job.end_date }}<br>
+  <b>Location:</b> {{ job.location_city }}, {{ job.location_state }}<br>
+  <b>Additional Info:</b><br>
+  {{ job.info }}<br>
+  <b>Required skills: </b> {% for skill in job.skills.all %}
+  {{ skill.skill }}{% if not forloop.last %},{% endif %}
+  {% empty %}
+  None
+  {% endfor %}<br>
+  <b>Contact Email:</b> {{ job.email }}<br>
+  <br>
+  <center>
+    Created by: {{ job.parent.user_name }}
+  </center>
+  <br>
+</div>
+</div>
+</center>
+</font>
+{% endfor %}
+</html>
+{% include "footer.html" %} 

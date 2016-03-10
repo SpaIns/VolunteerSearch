@@ -1,22 +1,92 @@
-<style>
+.Footer-items {
+	position: relative;
+  width: 100%;
+  float: right;
+}
 
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
+.Footer-item {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+
+.Footer-link {
+  position: relative;
+  display: block;
+  width: 100%;
   height: 100%;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
+  opacity: 0;
+  -webkit-animation: translate2 6000ms infinite;
+          animation: translate2 6000ms infinite;
 }
 
-/* Set the fixed height of the footer here */
-#footer {
-  height: 30px;
-  background-color: #66CCCC;
-  margin-top:50px;
-  padding-top:2px;
-  padding-bottom:20px;
+.Footer-item:nth-child(2) .Footer-link {
+  -webkit-animation-delay: 600ms;
+          animation-delay: 600ms;
 }
-</style>
+
+.Footer-item:nth-child(3) .Footer-link {
+  -webkit-animation-delay: 1200ms;
+          animation-delay: 1200ms;
+}
+
+.Footer-item:nth-child(4) .Footer-link {
+  -webkit-animation-delay: 1800ms;
+          animation-delay: 1800ms;
+}
+
+.Footer-item:nth-child(5) .Footer-link {
+  -webkit-animation-delay: 2400ms;
+          animation-delay: 2400ms;
+}
+
+.Footer-icon {
+  color: white;
+  position: relative;
+  left: 50%; /*centering the icon*/
+  top: 50%;
+  font-size: 1.6em;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.fa-codepen, .fa-linkedin, .fa-envelope, .fa-twitter, .fa-github {
+  font-size: 2.0em;
+}
+
+.Footer-link:hover .Footer-icon {
+  top: 30%;
+}
+
+@-webkit-keyframes translate2 {
+  2% {
+    opacity: 0;
+    margin-left: 175%;
+  }
+  21% {
+    opacity: 1;
+    margin-left: 0%;
+  }
+  64% {
+    opacity: 1;
+    margin-left: 0%;
+  }
+  80% {
+    opacity: 0;
+    margin-left: -250%;
+  }
+  100% {
+    opacity: 0;
+    margin-left: -250%;
+  }
+}
+h4{
+	padding-top: 5px;
+}
+h5{
+	text-align: right;
+	padding-top: 8px;
+	padding-right: 15px;
+}
